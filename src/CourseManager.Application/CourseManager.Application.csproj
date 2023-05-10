@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.5.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CourseManager.Domain\CourseManager.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Courses\Queries\" />
+    <None Remove="Abstractions\" />
+    <None Remove="Behaviors\" />
+    <None Remove="Exceptions\" />
+    <None Remove="Courses\Queries\GetCourseById\" />
+    <None Remove="Abstractions\Messaging\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Courses\Queries\" />
+    <Folder Include="Abstractions\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Courses\Queries\GetCourseById\" />
+    <Folder Include="Abstractions\Messaging\" />
+  </ItemGroup>
+</Project>
