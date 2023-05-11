@@ -1,7 +1,6 @@
 ﻿using CourseManager.Application.Abstractions.Messaging;
 using CourseManager.Application.Courses.Queries.GetCourseById;
 using CourseManager.Domain.Abstractions;
-using CourseManager.Domain.Exceptions;
 using CourseManager.Domain.Shared;
 
 namespace CourseManager.Application.Courses.Queries;
@@ -18,8 +17,15 @@ public class GetCourseQueryHandler : IQueryHandler<GetCourseByIdQuery, CourseRes
     public async Task<Result<CourseResponse>> Handle(
         GetCourseByIdQuery request, CancellationToken cancellationToken)
     {
-        var course = await _courseRepository.GetCourse(request.CourseId)
-                     ?? throw new CourseNotFoundException(request.CourseId);
+        var course = await _courseRepository.GetCourse(request.CourseId);
+
+        if (course is null) 
+        {
+            return Result.Failure<CourseResponse>(
+                new Error(
+                "Course.NotFound",
+                $"The course with the identifier {request.CourseId} was not found."));
+        }
 
         return new CourseResponse(course.Category,
                                    course.LongDescription,

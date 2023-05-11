@@ -11,6 +11,8 @@ internal sealed class CourseConfiguration : IEntityTypeConfiguration<Course>
         builder.ToTable(nameof(Course));
 
         builder.HasKey(x => new { x.Id });
+
+        builder.Property(p => p.Price).HasColumnType("decimal(18,4)");
     }
 }
 

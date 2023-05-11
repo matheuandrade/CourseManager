@@ -25,8 +25,6 @@ public sealed class Course : Entity
                     Price = price;
                 }
 
-    public Course(){}
-
     public string Description { get; set; } = string.Empty;
 
     public string LongDescription { get; set; } = string.Empty;

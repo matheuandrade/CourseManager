@@ -28,6 +28,7 @@
 
    <ItemGroup>
     <ProjectReference Include="..\CourseManager.Presentation\CourseManager.Presentation.csproj" />
+    <ProjectReference Include="..\CourseManager.Application\CourseManager.Application.csproj" />
     <ProjectReference Include="..\CourseManager.Persistence\CourseManager.Persistence.csproj" />
   </ItemGroup>
 

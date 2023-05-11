@@ -9,7 +9,7 @@ public static class PersistenceDI
         this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<ApplicationDbContext>(
-                (sp, optionsBuilder) =>
+                (serviceProvider, optionsBuilder) =>
                 {
                     optionsBuilder.UseSqlServer(
                         configuration.GetConnectionString("Database"));

@@ -1,15 +1,21 @@
 ﻿using CourseManager.Domain.Abstractions;
+using CourseManager.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CourseManager.Persistence;
 
-public sealed class ApplicationDbContext : DbContext, IUnitOfWork
+public partial class ApplicationDbContext : DbContext, IUnitOfWork
 {
-    public ApplicationDbContext(DbContextOptions options)
-           : base(options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
     {
-	     
     }
+
+    public ApplicationDbContext(){
+        this.Database.EnsureCreated();
+    }
+
+    public virtual DbSet<Course> Courses => Set<Course>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

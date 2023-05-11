@@ -4,10 +4,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder
     .Services
-    .AddPresentation()
-    .AddPersistence(builder.Configuration);
+    .AddMiddlewares()
+    .AddInfrastructure()
+    .AddPersistence(builder.Configuration)
+    .AddApplication()
+    .AddPresentation();
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -19,7 +24,6 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
 
 app.MapControllerRoute(
     name: "default",

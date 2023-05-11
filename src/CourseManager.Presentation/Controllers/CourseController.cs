@@ -2,19 +2,26 @@
 using CourseManager.Application.Courses.Queries;
 using CourseManager.Application.Courses.Queries.GetCourseById;
 using CourseManager.Domain.Shared;
-using CourseManager.Presentation.Abstractions;
-using CourseManager.Presentation.Contracts.Courses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using CourseManager.Presentation.Abstractions;
+using CourseManager.Presentation.Contracts.Courses;
 
 namespace CourseManager.Presentation.Controllers;
 
-[Route("api/courses")]
-    public sealed class CourseController : ApiController
+[ApiController]
+    [Route("[controller]")]
+    public class CourseController : ApiController
     {
         public CourseController(ISender sender)
             : base(sender)
         {
+        }
+
+         [HttpGet]
+         public IActionResult Get()
+        {
+            return Ok();
         }
 
         [HttpGet("{id:guid}")]
@@ -92,4 +99,3 @@ namespace CourseManager.Presentation.Controllers;
             return NoContent();
         }
     }
-
