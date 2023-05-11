@@ -18,8 +18,8 @@ public class GetCourseQueryHandler : IQueryHandler<GetCourseByIdQuery, CourseRes
     public async Task<Result<CourseResponse>> Handle(
         GetCourseByIdQuery request, CancellationToken cancellationToken)
     {
-        var course = await _courseRepository.GetCourse(request.courseId)
-                     ?? throw new CourseNotFoundException(request.courseId);
+        var course = await _courseRepository.GetCourse(request.CourseId)
+                     ?? throw new CourseNotFoundException(request.CourseId);
 
         return new CourseResponse(course.Category,
                                    course.LongDescription,

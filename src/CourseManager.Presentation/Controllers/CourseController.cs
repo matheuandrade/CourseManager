@@ -24,7 +24,7 @@ namespace CourseManager.Presentation.Controllers;
         {
             var query = new GetCourseByIdQuery(id);
 
-            Result<CourseResponse> response = await Sender.Send(
+            Result<CourseResponse> response = await _sender.Send(
                 query,
                 cancellationToken);
 
@@ -49,7 +49,7 @@ namespace CourseManager.Presentation.Controllers;
                 request.Url,
                 request.Price);
 
-            Result<Guid> result = await Sender.Send(command, cancellationToken);
+            Result<Guid> result = await _sender.Send(command, cancellationToken);
 
             if(result.IsFailure)
             {
@@ -62,27 +62,34 @@ namespace CourseManager.Presentation.Controllers;
                result.Value);
         }
 
-        // [HttpPut("{id:guid}")]
-        // public async Task<IActionResult> UpdateCourse(
-        //     Guid id,
-        //     [FromBody] UpdateMemberRequest request,
-        //     CancellationToken cancellationToken)
-        // {
-        //     var command = new UpdateMemberCommand(
-        //         id,
-        //         request.FirstName,
-        //         request.LastName);
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdateCourse(
+            Guid id,
+            [FromBody] UpdateCourseRequest request,
+            CancellationToken cancellationToken)
+        {
+            var command = new UpdateCourseRequest(
+                id,
+                request.Description,
+                request.LongDescription,
+                request.IconUrl,
+                request.CourseListIcon,
+                request.Category,
+                request.LessonsCounter,
+                request.SequenceNumber,
+                request.Url,
+                request.Price);
 
-        //     Result result = await Sender.Send(
-        //         command,
-        //         cancellationToken);
+            Result result = await _sender.Send(
+                command,
+                cancellationToken);
 
-        //     if (result.IsFailure)
-        //     {
-        //         return HandleFailure(result);
-        //     }
+            if (result.IsFailure)
+            {
+                return HandleFailure(result);
+            }
 
-        //     return NoContent();
-        // }
+            return NoContent();
+        }
     }
 

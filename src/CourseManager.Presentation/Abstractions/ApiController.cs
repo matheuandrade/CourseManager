@@ -8,10 +8,10 @@ namespace CourseManager.Presentation.Abstractions;
 [ApiController]
 public abstract class ApiController : ControllerBase
 {
-    protected readonly ISender Sender;
+    protected readonly ISender _sender;
     public ApiController(ISender sender)
     {
-        Sender = sender;
+        _sender = sender;
     }
 
     protected IActionResult HandleFailure(Result result) =>

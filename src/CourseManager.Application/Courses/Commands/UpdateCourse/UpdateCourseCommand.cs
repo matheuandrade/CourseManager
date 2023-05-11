@@ -1,8 +1,9 @@
 using CourseManager.Application.Abstractions.Messaging;
 
-namespace CourseManager.Application.Courses.Commands.CreateCourse;
+namespace CourseManager.Application.Courses.Commands.UpdateCourse;
 
-public sealed record CreateCourseCommand(string Description, 
+public sealed record UpdateCourseCommand(Guid CourseId,
+                                        string Description, 
                                         string LongDescription, 
                                         string IconUrl,
                                         string CourseListIcon,
@@ -10,5 +11,5 @@ public sealed record CreateCourseCommand(string Description,
                                         int LessonsCounter,
                                         int SequenceNumber,
                                         string Url,
-                                        decimal Price) : ICommand<Guid>;
+                                        decimal Price) : ICommand;
 

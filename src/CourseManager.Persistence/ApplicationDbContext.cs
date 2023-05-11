@@ -1,5 +1,4 @@
-﻿using System;
-using CourseManager.Domain.Abstractions;
+﻿using CourseManager.Domain.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CourseManager.Persistence;
