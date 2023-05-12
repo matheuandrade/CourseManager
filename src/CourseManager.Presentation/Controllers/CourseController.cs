@@ -6,6 +6,8 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using CourseManager.Presentation.Abstractions;
 using CourseManager.Presentation.Contracts.Courses;
+using CourseManager.Application.Courses.Commands.UpdateCourse;
+using CourseManager.Application.Courses.Commands.DeleteCourse;
 
 namespace CourseManager.Presentation.Controllers;
 
@@ -75,7 +77,7 @@ namespace CourseManager.Presentation.Controllers;
             [FromBody] UpdateCourseRequest request,
             CancellationToken cancellationToken)
         {
-            var command = new UpdateCourseRequest(
+            var command = new UpdateCourseCommand(
                 id,
                 request.Description,
                 request.LongDescription,
@@ -86,6 +88,26 @@ namespace CourseManager.Presentation.Controllers;
                 request.SequenceNumber,
                 request.Url,
                 request.Price);
+
+            Result result = await _sender.Send(
+                command,
+                cancellationToken);
+
+            if (result.IsFailure)
+            {
+                return HandleFailure(result);
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> DeleteCourse(
+            Guid id,
+            CancellationToken cancellationToken)
+        {
+            var command = new DeleteCourseCommand(
+                id);
 
             Result result = await _sender.Send(
                 command,

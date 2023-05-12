@@ -14,5 +14,7 @@ public sealed class CourseRepository : ICourseRepository
 
     public void Update(Course course) => _context.Set<Course>().Update(course);
 
+    public void Delete(Course course) => _context.Set<Course>().Remove(course);
+
     public async Task<Course?> GetCourse(Guid courseId) => await _context.Set<Course>().FirstOrDefaultAsync(x => x.Id == courseId);
 }
