@@ -2,7 +2,6 @@ using CourseManager.Application.Abstractions.Messaging;
 using CourseManager.Domain.Abstractions;
 using CourseManager.Domain.Entities;
 using CourseManager.Domain.Shared;
-using MediatR;
 
 namespace CourseManager.Application.Courses.Commands.CreateCourse;
 

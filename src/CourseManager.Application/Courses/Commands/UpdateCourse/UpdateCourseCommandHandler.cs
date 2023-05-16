@@ -28,15 +28,15 @@ internal sealed class UpdateCourseCommandHanlder : ICommandHandler<UpdateCourseC
                         $"The Course with the identifier {request.CourseId} was not found."));
         }
 
-        course.Description = request.Description;
-        course.LongDescription = request.LongDescription;
-        course.IconUrl = request.IconUrl;
-        course.CourseListIcon = request.CourseListIcon;
-        course.Category = request.Category;
-        course.LessonsCounter = request.LessonsCounter;
-        course.SequenceNumber = request.SequenceNumber;
-        course.Url = request.Url;
-        course.Price = request.Price;
+        course.UpdateCourse(request.Description,
+                            request.LongDescription,
+                            request.IconUrl,
+                            request.CourseListIcon,
+                            request.Category,
+                            request.LessonsCounter,
+                            request.SequenceNumber,
+                            request.Url,
+                            request.Price);
 
         _courseRepository.Update(course);
 
